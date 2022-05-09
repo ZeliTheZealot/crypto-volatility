@@ -18,7 +18,7 @@ my_api_key = "TD.BDDr5Mkdv9P7jcBv.HGl8KnCzXgfUQSx.GiAyuItybr9u2tg.5DBEOQ-S7tzj-s
 exchange = "binance"
 TOKEN_WANTED = ["BTC"]
 start = pytz.UTC.localize(datetime.datetime(2019, 5, 1))
-end = pytz.UTC.localize(datetime.datetime(2022, 4, 30))
+end = pytz.UTC.localize(datetime.datetime(2022, 5, 1)) 
 save_destination = exchange + "_" + "_".join(TOKEN_WANTED) + "_from_" + start.strftime("%Y_%m_%d") + "_to_" + end.strftime("%Y_%m_%d") + ".json"
 
 exchange_details = get_exchange_details(exchange)
