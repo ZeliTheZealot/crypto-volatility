@@ -1,10 +1,11 @@
 import os
 import pandas as pd
 import pprint as pp
-import datetime
-import gzip
+import datetime as dt
+import pathlib
 import re
 import json
+import math
 
 symbols_list_file_name = "binance_BTC_from_2019_05_01_to_2022_04_30.json"
 with open(symbols_list_file_name, "r") as f:
@@ -22,14 +23,14 @@ date_ticker_regex = re.compile(pattern)
 
 def time_is_in_day(a, timestamp):
     # checks if timestamp (in microseconds) is within 1 day in the future of a (a datetime object)
-    b = datetime.datetime.utcfromtimestamp(timestamp/1000000)
-    return a <= b < a + datetime.timedelta(days=1)
+    b = dt.datetime.utcfromtimestamp(timestamp/1000000)
+    return a <= b < a + dt.timedelta(days=1)
 
 def data_integrity_test(df, date_ticker_regex):
     date_ticker_regex_result = date_ticker_regex.match(data_name)
     file_name_date = date_ticker_regex_result.group(1)
     file_name_ticker = date_ticker_regex_result.group(2)
-    file_name_datetime_object = datetime.datetime.strptime(file_name_date, "%Y-%m-%d")
+    file_name_datetime_object = dt.datetime.strptime(file_name_date, "%Y-%m-%d")
     
     first_time = df.iloc[0]['timestamp']
     last_time = df.iloc[-1]['timestamp']
@@ -54,7 +55,7 @@ def data_integrity_test(df, date_ticker_regex):
     date_ticker_regex_result = date_ticker_regex.match(data_name)
     file_name_date = date_ticker_regex_result.group(1)
     file_name_ticker = date_ticker_regex_result.group(2)
-    file_name_datetime_object = datetime.datetime.strptime(file_name_date, "%Y-%m-%d")
+    file_name_datetime_object = dt.datetime.strptime(file_name_date, "%Y-%m-%d")
     
     first_time = df.iloc[0]['timestamp']
     last_time = df.iloc[-1]['timestamp']

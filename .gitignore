@@ -1,3 +1,6 @@
+.ipynb_checkpoints
 datasets_by_asset_binance/
+full_datasets_against_btc_binance/
+full_datasets_by_asset_binance/
+full_returns/
 returns/
-coinbase_download.ipynb

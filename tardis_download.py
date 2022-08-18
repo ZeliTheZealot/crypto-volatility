@@ -1,13 +1,5 @@
 from tardis_dev import datasets, get_exchange_details
 import logging
-import os
-import pandas as pd
-import pprint as pp
-import datetime
-import dateutil.parser
-import pytz
-import gzip
-import re
 import json
 # prevents weird issue
 import nest_asyncio
