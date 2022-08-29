@@ -5,3 +5,4 @@ full_datasets_by_asset_binance/
 full_returns/
 returns/
 venv/
+full_returns_winsorised/
