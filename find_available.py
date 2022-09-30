@@ -1,13 +1,8 @@
 from tardis_dev import datasets, get_exchange_details
 import logging
-import os
-import pandas as pd
-import pprint as pp
 import datetime
 import dateutil.parser
 import pytz
-import gzip
-import re
 import json
 
 # prevents weird issue
@@ -19,12 +14,17 @@ exchange = "binance"
 TOKEN_WANTED = ["BTC"]
 start = pytz.UTC.localize(datetime.datetime(2019, 5, 1))
 end = pytz.UTC.localize(datetime.datetime(2022, 5, 1)) 
-save_destination = exchange + "_" + "_".join(TOKEN_WANTED) + "_from_" + start.strftime("%Y_%m_%d") + "_to_" + end.strftime("%Y_%m_%d") + ".json"
-
+save_destination = (
+    exchange + "_" + "_".join(TOKEN_WANTED) + 
+    "_from_" + start.strftime("%Y_%m_%d") + 
+    "_to_" + end.strftime("%Y_%m_%d") + ".json"
+)
 exchange_details = get_exchange_details(exchange)
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
 def is_wanted(pair_name):
     # checks if any string in TOKEN_WANTED is a substring of pair_name
-    return any(str.casefold(item) in str.casefold(pair_name) for item in TOKEN_WANTED) 
+    return any(str.casefold(i) in str.casefold(pair_name) for i in TOKEN_WANTED)
+
 count = 0
 symbols_list = []
 for item in exchange_details['availableSymbols']:
@@ -38,8 +38,6 @@ for item in exchange_details['availableSymbols']:
     if available_since < start and lasts_till_end() and is_wanted(pair_name):
         symbols_list.append(pair_name)
         count += 1
-print(count)
-print(symbols_list)
 
 with open(save_destination, "w") as f:
     json.dump(symbols_list, f)
